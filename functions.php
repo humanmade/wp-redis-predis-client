@@ -1,25 +1,28 @@
 <?php
+namespace WP_Predis;
+use Predis\Client as PredisClient;
+use Exception;
 
-function wp_redis_client_check_dependencies() {
+function check_client_dependencies() {
 	if ( ! class_exists( 'Predis\Client' ) ) {
 		return 'Warning! The Predis\Client class is unavailable, which is required by WP Redis Predis.';
 	}
 	return true;
 }
 
-function wp_redis_client_connection( $args ) {
+function client_connection( $args ) {
 
 	// TODO $connection_details['timeout']
 	// TODO $connection_details['retry_interval']
-	$params = wp_predis_build_params( $args );
-	$options = wp_predis_build_options( $args );
+	$params = build_params( $args );
+	$options = build_options( $args );
 
-	$redis = new Predis\Client( $params, $options );
+	$redis = new PredisClient( $params, $options );
 
 	return $redis;
 }
 
-function wp_redis_client_setup_connection( $redis, $settings, $keys_methods = array()) {
+function setup_client_connection( $redis, $settings, $keys_methods = array()) {
 	try {
 		// we ignore $keys_methods because both auth and database selection are
 		// handled in Predis/Client instantiation.
@@ -35,7 +38,7 @@ function wp_redis_client_setup_connection( $redis, $settings, $keys_methods = ar
 	return true;
 }
 
-function wp_predis_build_params( $args ) {
+function build_params( $args ) {
 	$scheme = 'tcp';
 	$hostKey = 'host';
 	$isTLS = isset( $args['ssl'] ) && is_array( $args['ssl'] );
@@ -63,7 +66,7 @@ function wp_predis_build_params( $args ) {
 	return $params;
 }
 
-function wp_predis_build_options( $args ) {
+function build_options( $args ) {
 
 	$options = array(
 		'exceptions' => true,
@@ -74,4 +77,13 @@ function wp_predis_build_options( $args ) {
 	);
 
 	return $options;
+}
+function check_client_dependencies_callback() {
+	return 'WP_Predis\check_client_dependencies';
+}
+function client_connection_callback() {
+	return 'WP_Predis\client_connection';
+}
+function setup_client_connection_callback() {
+	return 'WP_Predis\setup_client_connection';
 }

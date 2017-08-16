@@ -10,7 +10,7 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 	);
 
 	public function test_dependencies() {
-		$result = wp_redis_client_check_dependencies();
+		$result = WP_Predis\check_client_dependencies();
 		if ( class_exists( 'Predis\Client' ) ) {
 			$this->assertTrue( $result );
 		} else {
@@ -28,7 +28,7 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 			'scheme' => 'unix',
 			'path' => $socket_path,
 		);
-		$actual = wp_predis_build_params( $args );
+		$actual = WP_Predis\build_params( $args );
 		$this->assertTrue( arrays_are_similar( $expected, $actual ) );
 	}
 
@@ -49,19 +49,19 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 			'port' => 6379,
 			'ssl' => $ssl,
 		);
-		$actual = wp_predis_build_params( $args );
+		$actual = WP_Predis\build_params( $args );
 		$this->assertTrue( arrays_are_similar( $expected, $actual ) );
 	}
 
 	public function test_redis_client_connection() {
-		$redis = wp_redis_client_connection( $this->connection_details );
+		$redis = WP_Predis\client_connection( $this->connection_details );
 		$redis->connect();
 		$this->assertTrue( $redis->isConnected() );
 	}
 
 	public function test_setup_connection() {
-		$redis = wp_redis_client_connection( $this->connection_details );
-		$isSetUp = wp_redis_client_setup_connection( $redis, array(), array(
+		$redis = WP_Predis\client_connection( $this->connection_details );
+		$isSetUp = WP_Predis\setup_client_connection( $redis, array(), array(
 			// we test the 'exists' function gets called and we pass
 			// $this->connection_details['host'] as the argument. We only care
 			// about if calling 'exists' throws an exception or not
@@ -74,16 +74,16 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 	// the default and the other to a different database and modifying the same
 	// key and testing that they're different
 	public function test_setup_second_database() {
-		$redis = wp_redis_client_connection( $this->connection_details );
+		$redis = WP_Predis\client_connection( $this->connection_details );
 		$second_db = array_merge( $this->connection_details, array(
 			'database' => 2,
 		) );
-		$redis2 = wp_redis_client_connection( $second_db );
+		$redis2 = WP_Predis\client_connection( $second_db );
 		$keys_methods = array(
 			'database' => 'select',
 		);
-		wp_redis_client_setup_connection( $redis, $this->connection_details, $keys_methods );
-		wp_redis_client_setup_connection( $redis2, $second_db, $keys_methods );
+		WP_Predis\setup_client_connection( $redis, $this->connection_details, $keys_methods );
+		WP_Predis\setup_client_connection( $redis2, $second_db, $keys_methods );
 		$redis->set( 'foo', 'bar' );
 		$redis2->set( 'foo', 'baz' );
 		$this->assertEquals( $redis->get( 'foo' ), 'bar' );
@@ -98,11 +98,23 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 		$auth = array_merge( $this->connection_details, array(
 			'auth' => 'thiswillfail',
 		) );
-		$redis = wp_redis_client_connection( $auth );
+		$redis = WP_Predis\client_connection( $auth );
 		$keys_methods = array(
 			'auth' => 'auth',
 		);
 		$this->setExpectedException( 'Exception' );
-		wp_redis_client_setup_connection( $redis, $auth, $keys_methods );
+		WP_Predis\setup_client_connection( $redis, $auth, $keys_methods );
+	}
+
+	public function test_check_client_dependencies_callback() {
+		$this->assertEquals( WP_Predis\check_client_dependencies_callback(), 'WP_Predis\check_client_dependencies' );
+	}
+
+	public function test_client_connection_callback() {
+		$this->assertEquals( WP_Predis\client_connection_callback(), 'WP_Predis\client_connection' );
+	}
+
+	public function test_setup_client_connection_callback() {
+		$this->assertEquals( WP_Predis\setup_client_connection_callback(), 'WP_Predis\setup_client_connection' );
 	}
 }
