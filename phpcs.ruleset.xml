@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<ruleset name="WP Redis">
+	<description>Sniffs for the coding standards of the WP Redis plugin</description>
+
+	<exclude-pattern>vendor</exclude-pattern>
+
+	<rule ref="WordPress-VIP">
+		<exclude name="WordPress.NamingConventions.ValidVariableName" />
+		<exclude name="Squiz.PHP.CommentedOutCode" />
+		<exclude name="WordPress.CSRF.NonceVerification" />
+		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing" />
+		<exclude name="WordPress.VIP.DirectDatabaseQuery" />
+		<exclude name="WordPress.VIP.SlowDBQuery" />
+		<exclude name="WordPress.VIP.SuperGlobalInputUsage" />
+		<exclude name="WordPress.VIP.ValidatedSanitizedInput" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.error_log" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.serialize" />
+	</rule>
+	<rule ref="WordPress.PHP.DevelopmentFunctions">
+		<properties>
+			<property name="exclude" value="error_log" />
+		</properties>
+	</rule>
+	<rule ref="WordPress.PHP.DiscouragedPHPFunctions">
+		<properties>
+			<property name="exclude" type="array" value="serialize,unserialize" />
+		</properties>
+	</rule>
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<property name="strict_class_file_names" value="false" />
+		</properties>
+	</rule>
+</ruleset>
