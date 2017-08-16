@@ -35,6 +35,7 @@ before_script:
       fi
 
 script:
+    - phpunit --version
     - phpunit
     - |
       if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
