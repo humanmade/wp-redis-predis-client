@@ -26,6 +26,8 @@ matrix:
 services:
     - redis-server
 
+install: composer install
+
 before_script:
     - |
       if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
