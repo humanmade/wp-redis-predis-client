@@ -1,7 +1,6 @@
 <?php
 namespace WP_Predis;
 use Predis\Client as PredisClient;
-use WP_Predis\Decorator;
 use Exception;
 
 function check_client_dependencies() {
