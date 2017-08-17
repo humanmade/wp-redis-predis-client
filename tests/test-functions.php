@@ -2,7 +2,7 @@
 
 class FunctionsTest extends PHPUnit_Framework_TestCase {
 
-	protected $connection_details = array(
+	protected static $client_parameters = array(
 		'host' => '127.0.0.1',
 		'port' => 6379,
 		'timeout' => 1000,
@@ -54,16 +54,16 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function test_redis_client_connection() {
-		$redis = WP_Predis\client_connection( $this->connection_details );
+		$redis = WP_Predis\client_connection( self::$client_parameters );
 		$redis->connect();
 		$this->assertTrue( $redis->isConnected() );
 	}
 
 	public function test_setup_connection() {
-		$redis = WP_Predis\client_connection( $this->connection_details );
+		$redis = WP_Predis\client_connection( self::$client_parameters );
 		$isSetUp = WP_Predis\setup_client_connection( $redis, array(), array(
 			// we test the 'exists' function gets called and we pass
-			// $this->connection_details['host'] as the argument. We only care
+			// self::$client_parameters['host'] as the argument. We only care
 			// about if calling 'exists' throws an exception or not
 			'exists' => 'host',
 		) );
@@ -74,15 +74,15 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 	// the default and the other to a different database and modifying the same
 	// key and testing that they're different
 	public function test_setup_second_database() {
-		$redis = WP_Predis\client_connection( $this->connection_details );
-		$second_db = array_merge( $this->connection_details, array(
+		$redis = WP_Predis\client_connection( self::$client_parameters );
+		$second_db = array_merge( self::$client_parameters, array(
 			'database' => 2,
 		) );
 		$redis2 = WP_Predis\client_connection( $second_db );
 		$keys_methods = array(
 			'database' => 'select',
 		);
-		WP_Predis\setup_client_connection( $redis, $this->connection_details, $keys_methods );
+		WP_Predis\setup_client_connection( $redis, self::$client_parameters, $keys_methods );
 		WP_Predis\setup_client_connection( $redis2, $second_db, $keys_methods );
 		$redis->set( 'foo', 'bar' );
 		$redis2->set( 'foo', 'baz' );
@@ -95,7 +95,7 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 	// we test that auth gets passed by the fact that auth will fail with a bad
 	// password
 	public function test_setup_connection_auth() {
-		$auth = array_merge( $this->connection_details, array(
+		$auth = array_merge( self::$client_parameters, array(
 			'auth' => 'thiswillfail',
 		) );
 		$redis = WP_Predis\client_connection( $auth );
