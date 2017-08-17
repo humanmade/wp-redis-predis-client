@@ -1,5 +1,7 @@
 <?php
 
+require_once( dirname( dirname( __FILE__ ) ) . '/vendor/autoload.php' );
+require_once( dirname( dirname( __FILE__ ) ) . '/class-wp-predis-decorator.php' );
 require_once( dirname( dirname( __FILE__ ) ) . '/functions.php' );
 /**
  * Determine if two associative arrays are similar
