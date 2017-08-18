@@ -2,7 +2,7 @@
 
 WP_REDIS=/tmp/nathanielks-wp-redis
 
-git clone -b make-redis-pluggable --single-branch --depth 1 git@github.com:nathanielks/wp-redis.git ${WP_REDIS}
+git clone -b make-redis-pluggable --single-branch --depth 1 https://github.com/nathanielks/wp-redis.git ${WP_REDIS}
 
 cd "${WP_REDIS}" || exit
 composer install
