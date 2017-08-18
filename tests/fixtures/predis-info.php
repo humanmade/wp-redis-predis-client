@@ -1,7 +1,7 @@
 <?php
 
-return [
-	'Server' => [
+return array(
+	'Server' => array(
 		'redis_version' => '4.0.1',
 		'redis_git_sha1' => '00000000',
 		'redis_git_dirty' => '0',
@@ -21,14 +21,14 @@ return [
 		'lru_clock' => '9838734',
 		'executable' => '/usr/local/opt/redis/bin/redis-server',
 		'config_file' => '/usr/local/etc/redis.conf',
-	],
-	'Clients' => [
+	),
+	'Clients' => array(
 		'connected_clients' => '1',
 		'client_longest_output_list' => '0',
 		'client_biggest_input_buf' => '0',
 		'blocked_clients' => '0',
-	],
-	'Memory' => [
+	),
+	'Memory' => array(
 		'used_memory' => '1031488',
 		'used_memory_human' => '1007.31K',
 		'used_memory_rss' => '1482752',
@@ -51,8 +51,8 @@ return [
 		'mem_allocator' => 'libc',
 		'active_defrag_running' => '0',
 		'lazyfree_pending_objects' => '0',
-	],
-	'Persistence' => [
+	),
+	'Persistence' => array(
 		'loading' => '0',
 		'rdb_changes_since_last_save' => '0',
 		'rdb_bgsave_in_progress' => '0',
@@ -69,8 +69,8 @@ return [
 		'aof_last_bgrewrite_status' => 'ok',
 		'aof_last_write_status' => 'ok',
 		'aof_last_cow_size' => '0',
-	],
-	'Stats' => [
+	),
+	'Stats' => array(
 		'total_connections_received' => '554',
 		'total_commands_processed' => '1980',
 		'instantaneous_ops_per_sec' => '0',
@@ -95,8 +95,8 @@ return [
 		'active_defrag_misses' => '0',
 		'active_defrag_key_hits' => '0',
 		'active_defrag_key_misses' => '0',
-	],
-	'Replication' => [
+	),
+	'Replication' => array(
 		'role' => 'master',
 		'connected_slaves' => '0',
 		'master_replid' => 'f652af702c58e3d2cc4a593149b22931613e2b09',
@@ -107,21 +107,21 @@ return [
 		'repl_backlog_size' => '1048576',
 		'repl_backlog_first_byte_offset' => '0',
 		'repl_backlog_histlen' => '0',
-	],
-	'CPU' => [
+	),
+	'CPU' => array(
 		'used_cpu_sys' => '10.93',
 		'used_cpu_user' => '6.98',
 		'used_cpu_sys_children' => '0.06',
 		'used_cpu_user_children' => '0.01',
-	],
-	'Cluster' => [
+	),
+	'Cluster' => array(
 		'cluster_enabled' => '0',
-	],
-	'Keyspace' => [
-		'db0' => [
+	),
+	'Keyspace' => array(
+		'db0' => array(
 			'keys' => '1',
 			'expires' => '0',
 			'avg_ttl' => '0',
-		],
-	],
-];
+		),
+	),
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 	'redis_version' => '4.0.1',
 	'redis_git_sha1' => 0,
 	'redis_git_dirty' => 0,
@@ -102,4 +102,4 @@ return [
 	'used_cpu_user_children' => '0.01',
 	'cluster_enabled' => 0,
 	'db0' => 'keys=1,expires=0,avg_ttl=0',
-];
+);
