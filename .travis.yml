@@ -37,6 +37,7 @@ before_script:
         composer global require wp-coding-standards/wpcs
         phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
       fi
+    - bin/setup-wp-redis.sh
 
 script:
     - phpunit --version
@@ -45,3 +46,4 @@ script:
       if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
         phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
       fi
+    - bin/test-wp-redis.sh
