@@ -44,7 +44,7 @@ class Decorator {
 		return $newInfo;
 	}
 
-	protected function __call( $method_name, $args ) {
+	public function __call( $method_name, $args ) {
 		// TODO perhaps we wrap this in a try/catch and return false when
 		// there's an exception?
 		$value = call_user_func_array( array( $this->client, $method_name ), $args );
