@@ -99,7 +99,7 @@ class WPPredisDecoratorTest extends PHPUnit_Framework_TestCase {
 		$phpredis_info = (array) json_decode( file_get_contents( dirname( __FILE__ ) . '/fixtures/phpredis-info.json' ) ); // @codingStandardsIgnoreLine
 		$phpredis = new Redis;
 		$phpredis->connect( '127.0.0.1', 6379 );
-		var_dump( json_encode( $phpredis->info() ) );
+		echo json_encode( $phpredis->info() );
 		$this->client->set( 'foo', 'bar' );
 		$actual = $this->client->info();
 
