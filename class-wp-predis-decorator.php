@@ -31,6 +31,10 @@ class Decorator {
 		return $this->transform_info( $info );
 	}
 
+	public function close() {
+		return $this->client->disconnect();
+	}
+
 	public function transform_info( $info ) {
 		// let's pop this off because special formatting is required`
 		$keyspace = $info['Keyspace'];

@@ -103,6 +103,10 @@ class WPPredisDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $phpredis_info['db0'], $actual['db0'] );
 	}
 
+	public function test_close() {
+		$this->assertEquals( null, $this->client->close() );
+	}
+
 	public function tearDown() {
 		parent::tearDown();
 		$this->client->flushall();
