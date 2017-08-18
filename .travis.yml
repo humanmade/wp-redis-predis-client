@@ -30,6 +30,7 @@ install: composer install
 
 before_script:
     - export PATH="./vendor/bin:$PATH"
+    - echo 'extension = "redis.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - |
       if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
         export PATH="$HOME/.composer/vendor/bin:$PATH"
