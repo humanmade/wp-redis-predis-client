@@ -28,7 +28,10 @@ class Decorator {
 
 	public function info( $section = null ) {
 		$info = $this->client->info();
+		return $this->transform_info( $info );
+	}
 
+	public function transform_info( $info ) {
 		// let's pop this off because special formatting is required`
 		$keyspace = $info['Keyspace'];
 		unset( $info['Keyspace'] );
