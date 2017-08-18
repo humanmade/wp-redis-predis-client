@@ -26,6 +26,24 @@ class Decorator {
 		$this->client = $client;
 	}
 
+	public function info( $section = null ) {
+		$info = $this->client->info();
+
+		// let's pop this off because special formatting is required`
+		$keyspace = $info['Keyspace'];
+		unset( $info['Keyspace'] );
+
+		$newInfo = array_reduce( $info, function( $carry, $item ) {
+			return array_merge( $carry, $item );
+		}, array());
+
+		foreach ( $keyspace as $db => $values ) {
+			$newInfo[ $db ] = str_replace( '&', ',', http_build_query( $values ) );
+		}
+
+		return $newInfo;
+	}
+
 	protected function __call( $method_name, $args ) {
 		// TODO perhaps we wrap this in a try/catch and return false when
 		// there's an exception?

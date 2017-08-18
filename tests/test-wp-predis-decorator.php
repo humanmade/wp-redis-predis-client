@@ -95,6 +95,15 @@ class WPPredisDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 3, $deleted );
 	}
 
+	public function test_info() {
+		$phpredis_info = (array) json_decode( file_get_contents( dirname( __FILE__ ) . '/fixtures/phpredis-info.json' ) ); // @codingStandardsIgnoreLine
+		$this->client->set('foo', 'bar');
+		$actual = $this->client->info();
+
+		$this->assertEquals( array_keys( $phpredis_info ), array_keys( $actual ) );
+		$this->assertEquals( $phpredis_info['db0'], $actual['db0'] );
+	}
+
 	public function tearDown() {
 		parent::tearDown();
 		$this->client->flushall();
