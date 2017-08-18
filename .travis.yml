@@ -25,6 +25,10 @@ matrix:
 
 services:
     - redis-server
+addons:
+  apt:
+    packages:
+    - realpath
 
 install: composer install
 
@@ -38,7 +42,6 @@ before_script:
         phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
       fi
     - bin/setup-wp-redis.sh
-    - sudo apt-get install realpath
 
 script:
     - phpunit --version
