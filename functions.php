@@ -78,12 +78,21 @@ function build_options( $args ) {
 
 	return $options;
 }
+
+function append_error_messages( $errors ) {
+	return array(
+		'/^Connection refused/',
+	);
+}
+
 function check_client_dependencies_callback() {
 	return 'WP_Predis\check_client_dependencies';
 }
+
 function client_connection_callback() {
 	return 'WP_Predis\client_connection';
 }
+
 function setup_client_connection_callback() {
 	return 'WP_Predis\setup_client_connection';
 }

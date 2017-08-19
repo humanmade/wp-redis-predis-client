@@ -106,6 +106,16 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 		WP_Predis\setup_client_connection( $redis, $auth, $keys_methods );
 	}
 
+	public function test_append_error_messages() {
+		$expected = array(
+			'/^Connection refused/',
+		);
+		$actual = WP_Predis\append_error_messages(array(
+			'error',
+		));
+		$this->assertEquals( $expected, $actual );
+	}
+
 	public function test_check_client_dependencies_callback() {
 		$this->assertEquals( WP_Predis\check_client_dependencies_callback(), 'WP_Predis\check_client_dependencies' );
 	}
