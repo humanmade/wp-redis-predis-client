@@ -1,4 +1,5 @@
 <?php
+
 namespace WP_Predis;
 use Predis\Client as PredisClient;
 use Exception;
