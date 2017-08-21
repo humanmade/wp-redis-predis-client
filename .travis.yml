@@ -44,10 +44,13 @@ before_script:
     - bin/setup-wp-redis.sh
 
 script:
-    - phpunit --version
     - phpunit
     - |
       if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
         phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
       fi
     - bin/test-wp-redis.sh
+    - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
