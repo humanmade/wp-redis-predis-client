@@ -4,6 +4,9 @@ namespace WP_Predis;
 use Predis\Client as PredisClient;
 use Exception;
 
+require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
+require_once( dirname( __FILE__ ) . '/class-wp-predis-decorator.php' );
+
 function check_client_dependencies() {
 	if ( ! class_exists( 'Predis\Client' ) ) {
 		return 'Warning! The Predis\Client class is unavailable, which is required by WP Redis Predis.';
