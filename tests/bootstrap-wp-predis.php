@@ -10,4 +10,4 @@ $_wp_predis_dir = getenv( 'WP_PREDIS_DIR' );
 require_once $_tests_dir . '/includes/functions.php';
 require_once $_wp_predis_dir . '/functions.php';
 
-WP_Predis\add_filters();
+WP_Predis\add_filters( 'tests_add_filter' );
