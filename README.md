@@ -58,7 +58,7 @@ $redis_server = array(
     'host' => '127.0.0.1',
     'port' => 6379,
 	'ssl'  => array(
-		'cafile' => '/path/to/private.pem',
+		'local_cert' => '/path/to/certificate_and_key.pem',
 		'verify_peer' => true,
 	),
 );
