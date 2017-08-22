@@ -52,7 +52,7 @@ Now that files have been included, it's recommended you use the included [`objec
 WP Redis - Predis Client adheres to WP Redis' [configuration details](https://github.com/pantheon-systems/wp-redis#installation). Predis also takes an additional argument, `ssl`, for configuring TLS connections. See PHP's [SSL Context options](http://php.net/manual/en/context.ssl.php) for more details.
 
 
-```
+```php
 global $redis_server;
 $redis_server = array(
     'host' => '127.0.0.1',
