@@ -1,26 +1,26 @@
 <table width="100%">
-	<tr>
-		<td align="left" width="70">
-			<strong>WP Redis - Predis Client</strong><br />
-            An alternative Redis client for use with <a href="https://github.com/pantheon-systems/wp-redis">WP Redis</a>.
-		</td>
-		<td align="right" width="20%">
-			<a href="https://travis-ci.org/humanmade/wp-redis-predis-client">
-				<img src="https://travis-ci.org/humanmade/wp-redis-predis-client.svg?branch=master" alt="Build status">
-			</a>
+    <tr>
+        <td align="left" width="70">
+            <strong>WP Redis - Predis Client</strong><br />
+            An alternative Redis client for use with <a href="https://github.com/pantheon-systems/wp-redis">WP Redis</a>. Enables TLS connections.
+        </td>
+        <td align="right" width="20%">
+            <a href="https://travis-ci.org/humanmade/wp-redis-predis-client">
+                <img src="https://travis-ci.org/humanmade/wp-redis-predis-client.svg?branch=master" alt="Build status">
+            </a>
             <a href="https://codecov.io/gh/humanmade/wp-redis-predis-client">
             <img src="https://codecov.io/gh/humanmade/wp-redis-predis-client/branch/master/graph/badge.svg" alt="Codecov" />
             </a>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			A <strong><a href="https://hmn.md/">Human Made</a></strong> project. Maintained by @nathanielks.
-		</td>
-		<td align="center">
-			<img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" />
-		</td>
-	</tr>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            A <strong><a href="https://hmn.md/">Human Made</a></strong> project. Maintained by @nathanielks.
+        </td>
+        <td align="center">
+            <img src="https://hmn.md/content/themes/hmnmd/assets/images/hm-logo.svg" width="100" />
+        </td>
+    </tr>
 </table>
 
 # WP Redis - Predis Client
@@ -57,10 +57,10 @@ global $redis_server;
 $redis_server = array(
     'host' => '127.0.0.1',
     'port' => 6379,
-	'ssl'  => array(
-		'local_cert' => '/path/to/certificate_and_key.pem',
-		'verify_peer' => true,
-	),
+    'ssl'  => array(
+        'local_cert' => '/path/to/certificate_and_key.pem',
+        'verify_peer' => true,
+    ),
 );
 ```
 
