@@ -9,8 +9,8 @@ require_once( dirname( __FILE__ ) . '/class-wp-predis-decorator.php' );
 
 function add_filters( $add_filter_fn = 'add_filter' ) {
 	$add_filter_fn( 'wp_redis_check_client_dependencies_callback', 'WP_Predis\check_client_dependencies_callback' );
-	$add_filter_fn( 'wp_redis_client_connection_callback', 'WP_Predis\client_connection_callback' );
-	$add_filter_fn( 'wp_redis_setup_client_connection_callback', 'WP_Predis\setup_client_connection_callback', 10, 3 );
+	$add_filter_fn( 'wp_redis_prepare_client_connection_callback', 'WP_Predis\prepare_client_connection_callback' );
+	$add_filter_fn( 'wp_redis_perform_client_connection_callback', 'WP_Predis\perform_client_connection_callback', 10, 3 );
 	$add_filter_fn( 'wp_redis_retry_exception_messages', 'WP_Predis\append_error_messages' );
 }
 
@@ -21,7 +21,7 @@ function check_client_dependencies() {
 	return true;
 }
 
-function client_connection( $args ) {
+function prepare_client_connection( $args ) {
 
 	// TODO $connection_details['timeout']
 	// TODO $connection_details['retry_interval']
@@ -33,7 +33,7 @@ function client_connection( $args ) {
 	return $redis;
 }
 
-function setup_client_connection( $redis, $settings, $keys_methods = array()) {
+function perform_client_connection( $redis, $settings, $keys_methods = array()) {
 	try {
 		// we ignore $keys_methods because both auth and database selection are
 		// handled in Predis/Client instantiation.
@@ -100,10 +100,10 @@ function check_client_dependencies_callback() {
 	return 'WP_Predis\check_client_dependencies';
 }
 
-function client_connection_callback() {
-	return 'WP_Predis\client_connection';
+function prepare_client_connection_callback() {
+	return 'WP_Predis\prepare_client_connection';
 }
 
-function setup_client_connection_callback() {
-	return 'WP_Predis\setup_client_connection';
+function perform_client_connection_callback() {
+	return 'WP_Predis\perform_client_connection';
 }
