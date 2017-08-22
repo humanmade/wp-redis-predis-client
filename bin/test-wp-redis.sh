@@ -2,7 +2,7 @@
 SCRIPT="$(realpath "$0")"
 SCRIPTPATH="$(dirname "$SCRIPT")"
 WP_PREDIS="${SCRIPTPATH}/.."
-WP_REDIS=/tmp/nathanielks-wp-redis
+WP_REDIS=/tmp/wp-redis
 WP_TESTS=/tmp/wordpress-tests-lib
 PHPUNIT="${WP_PREDIS}/vendor/bin/phpunit"
 BOOTSTRAP_FILENAME="bootstrap-wp-predis.php"
