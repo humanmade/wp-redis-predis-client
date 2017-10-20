@@ -4,7 +4,6 @@ namespace WP_Predis;
 use Predis\Client as PredisClient;
 use Exception;
 
-require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
 require_once( dirname( __FILE__ ) . '/class-wp-predis-decorator.php' );
 
 function add_filters( $add_filter_fn = 'add_filter' ) {
