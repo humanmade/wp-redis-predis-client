@@ -1,4 +1,6 @@
 {
+	"name": "humanmade/wp-redis-predis-client",
+	"description": "An alternative Redis client for use with WP Redis. Enables TLS connections",
 	"autoload": {
 		"files": ["functions.php"]
 	},

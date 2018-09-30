@@ -32,6 +32,24 @@ This is a package that enables the use of [Predis](https://github.com/nrk/predis
 ### Requiring Files
 #### Composer
 
+Add this repo to `composer.json`:
+```json
+# composer.json
+{
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/humanmade/wp-redis-predis-client.git"
+    }
+  ]
+}
+```
+
+Then, install it:
+```bash
+$ composer require humanmade/wp-redis-predis-client:dev-master
+```
+
 When using Composer, `functions.php` file will automatically be loaded whenever you include Composer's autoloader in your project.
 
 #### Manually Requiring
@@ -63,5 +81,3 @@ $redis_server = array(
     ),
 );
 ```
-
-
