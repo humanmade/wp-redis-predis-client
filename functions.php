@@ -83,6 +83,7 @@ function build_options( $args ) {
 		'parameters' => array(
 			'password' => isset( $args['auth'] ) ? $args['auth'] : null,
 			'database' => isset( $args['database'] ) ? $args['database'] : null,
+			'persistent' => isset( $args['persistent'] ) ? $args['persistent'] : null,
 		),
 	);
 
