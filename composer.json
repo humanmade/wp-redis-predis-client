@@ -1,4 +1,5 @@
 {
+	"name": "humanmade/wp-redis-predis-client",
 	"autoload": {
 		"files": ["functions.php"]
 	},
