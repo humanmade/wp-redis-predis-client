@@ -22,6 +22,9 @@ class Decorator {
 		'hget',
 	);
 
+	// track time spend waiting for redis responses.
+	public $time_spent = 0;
+
 	public function __construct( PredisClient $client ) {
 		$this->client = $client;
 	}
@@ -54,7 +57,9 @@ class Decorator {
 	public function __call( $method_name, $args ) {
 		// TODO perhaps we wrap this in a try/catch and return false when
 		// there's an exception?
+		$start = microtime( true );
 		$value = call_user_func_array( array( $this->client, $method_name ), $args );
+		$this->time_spent += microtime( true ) - $start;
 		$returns = $value;
 
 		$lowered = strtolower( $method_name );
