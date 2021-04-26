@@ -13,8 +13,8 @@ branches:
     - master
 
 cache:
-  # - composer
-  # - $HOME/.composer/cache
+  - composer
+  - $HOME/.composer/cache
 
 matrix:
   include:
