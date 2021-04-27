@@ -1,6 +1,8 @@
 <?php
 
-class FunctionsTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class FunctionsTest extends TestCase {
 
 	protected static $client_parameters = array(
 		'host' => '127.0.0.1',
