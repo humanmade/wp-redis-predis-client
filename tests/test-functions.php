@@ -104,7 +104,7 @@ class FunctionsTest extends TestCase {
 		$keys_methods = array(
 			'auth' => 'auth',
 		);
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 		WP_Predis\perform_client_connection( $redis, $auth, $keys_methods );
 	}
 
