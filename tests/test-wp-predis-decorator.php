@@ -1,6 +1,8 @@
 <?php
 
-class WPPredisDecoratorTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class WPPredisDecoratorTest extends TestCase {
 
 	protected static $arguments = array(
 		'host' => '127.0.0.1',

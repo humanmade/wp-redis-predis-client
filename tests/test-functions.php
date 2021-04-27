@@ -1,6 +1,8 @@
 <?php
 
-class FunctionsTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
+
+class FunctionsTest extends TestCase {
 
 	protected static $client_parameters = array(
 		'host' => '127.0.0.1',
@@ -102,7 +104,7 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 		$keys_methods = array(
 			'auth' => 'auth',
 		);
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 		WP_Predis\perform_client_connection( $redis, $auth, $keys_methods );
 	}
 
