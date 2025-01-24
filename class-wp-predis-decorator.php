@@ -57,13 +57,7 @@ class Decorator {
 	public function __call( $method_name, $args ) {
 		// Optionally prevent flushing on non-cli.
 		if ( in_array( strtolower( $method_name ), [ 'flushdb', 'flushall' ], true ) ) {
-			if ( function_exists( 'wp_debug_backtrace_summary' ) ) {
-				$trace = wp_debug_backtrace_summary();
-			} else {
-				$backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 1 );
-				$caller    = array_shift( $backtrace );
-				$trace =  $caller['file'] . ':' . $caller['line'];
-			}
+			$trace = wp_debug_backtrace_summary();
 			error_log( sprintf( 'wp_cache_flush() requested from ' . $trace ) );
 
 			if ( 'cli' !== php_sapi_name() ) {
