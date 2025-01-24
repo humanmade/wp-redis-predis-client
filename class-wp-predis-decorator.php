@@ -55,6 +55,26 @@ class Decorator {
 	}
 
 	public function __call( $method_name, $args ) {
+		// Optionally prevent flushing on non-cli.
+		if ( in_array( strtolower( $method_name ), [ 'flushdb', 'flushall' ], true ) ) {
+			if ( function_exists( 'wp_debug_backtrace_summary' ) ) {
+				$trace = wp_debug_backtrace_summary();
+			} else {
+				$backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 1 );
+				$caller    = array_shift( $backtrace );
+				$trace =  $caller['file'] . ':' . $caller['line'];
+			}
+			error_log( sprintf( 'wp_cache_flush() requested from ' . $trace ) );
+
+			if ( 'cli' !== php_sapi_name() ) {
+				$allowed = apply_filters( 'wp_cache_flush_allowed_non_cli', true );
+				if ( ! $allowed ) {
+					trigger_error( sprintf( 'wp_cache_flush() is only allowed via WP CLI. Called from %s', $trace ), E_USER_WARNING );
+					return false;
+				}
+			}
+		}
+
 		// TODO perhaps we wrap this in a try/catch and return false when
 		// there's an exception?
 		$start = microtime( true );
