@@ -55,6 +55,23 @@ class Decorator {
 	}
 
 	public function __call( $method_name, $args ) {
+		// Optionally prevent flushing on non-cli.
+		if ( in_array( strtolower( $method_name ), [ 'flushdb', 'flushall' ], true ) ) {
+			$trace = wp_debug_backtrace_summary();
+			error_log( sprintf( 'wp_cache_flush() requested from ' . $trace ) );
+
+			/**
+			 * Filter whether to allow flushing. By default, only allowed on the CLI.
+			 *
+			 * @param bool True to permit flushing, false to disallow it and return immediately.
+			 */
+			$allowed = apply_filters( 'wp_cache_flush_allowed', 'cli' === php_sapi_name() );
+			if ( ! $allowed ) {
+				trigger_error( sprintf( 'wp_cache_flush() is only allowed via WP CLI. Called from %s', $trace ), E_USER_WARNING );
+				return false;
+			}
+		}
+
 		// TODO perhaps we wrap this in a try/catch and return false when
 		// there's an exception?
 		$start = microtime( true );
