@@ -60,12 +60,10 @@ class Decorator {
 			$trace = wp_debug_backtrace_summary();
 			error_log( sprintf( 'wp_cache_flush() requested from ' . $trace ) );
 
-			if ( 'cli' !== php_sapi_name() ) {
-				$allowed = apply_filters( 'wp_cache_flush_allowed_non_cli', true );
-				if ( ! $allowed ) {
-					trigger_error( sprintf( 'wp_cache_flush() is only allowed via WP CLI. Called from %s', $trace ), E_USER_WARNING );
-					return false;
-				}
+			$allowed = apply_filters( 'wp_cache_flush_allowed_non_cli', 'cli' === php_sapi_name() );
+			if ( ! $allowed ) {
+				trigger_error( sprintf( 'wp_cache_flush() is only allowed via WP CLI. Called from %s', $trace ), E_USER_WARNING );
+				return false;
 			}
 		}
 
