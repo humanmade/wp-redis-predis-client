@@ -1,0 +1,49 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # PHP 8.2 test runner (standalone tests with mocked WordPress functions)
+  test-php82:
+    image: wordpress:cli-php8.2
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./:/app
+    working_dir: /app
+
+  # PHP 8.3 test runner (standalone tests with mocked WordPress functions)
+  test-php83:
+    image: wordpress:cli-php8.3
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./:/app
+    working_dir: /app
+
+  # PHP 8.4 test runner (standalone tests with mocked WordPress functions)
+  test-php84:
+    image: wordpress:cli-php8.4
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./:/app
+    working_dir: /app
