@@ -5,11 +5,8 @@
             An alternative Redis client for use with <a href="https://github.com/pantheon-systems/wp-redis">WP Redis</a>. Enables TLS connections.
         </td>
         <td align="right" width="20%">
-            <a href="https://travis-ci.org/humanmade/wp-redis-predis-client">
-                <img src="https://travis-ci.org/humanmade/wp-redis-predis-client.svg?branch=master" alt="Build status">
-            </a>
-            <a href="https://codecov.io/gh/humanmade/wp-redis-predis-client">
-            <img src="https://codecov.io/gh/humanmade/wp-redis-predis-client/branch/master/graph/badge.svg" alt="Codecov" />
+            <a href="https://github.com/humanmade/wp-redis-predis-client/actions/workflows/tests.yml">
+                <img src="https://github.com/humanmade/wp-redis-predis-client/actions/workflows/tests.yml/badge.svg" alt="Build status">
             </a>
         </td>
     </tr>

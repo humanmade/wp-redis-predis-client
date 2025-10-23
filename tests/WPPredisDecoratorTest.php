@@ -16,6 +16,11 @@ class WPPredisDecoratorTest extends TestCase {
 			'host' => getenv('REDIS_HOST') ?: '127.0.0.1',
 			'port' => getenv('REDIS_PORT') ?: 6379,
 		);
+
+		// Add authentication if REDIS_PASSWORD is set
+		if ( getenv('REDIS_PASSWORD') ) {
+			self::$arguments['password'] = getenv('REDIS_PASSWORD');
+		}
 	}
 
 	public function setUp(): void {

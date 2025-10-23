@@ -14,6 +14,11 @@ class FunctionsTest extends TestCase {
 			'timeout' => 1000,
 			'retry_interval' => 100,
 		);
+
+		// Add authentication if REDIS_PASSWORD is set
+		if ( getenv('REDIS_PASSWORD') ) {
+			self::$client_parameters['auth'] = getenv('REDIS_PASSWORD');
+		}
 	}
 
 	public function test_dependencies() {
