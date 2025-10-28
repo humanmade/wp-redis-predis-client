@@ -17,7 +17,7 @@ class FunctionsTest extends TestCase {
 
 		// Add authentication if REDIS_PASSWORD is set
 		if ( getenv('REDIS_PASSWORD') ) {
-			self::$client_parameters['password'] = getenv('REDIS_PASSWORD');
+			self::$client_parameters['auth'] = getenv('REDIS_PASSWORD');
 		}
 	}
 
