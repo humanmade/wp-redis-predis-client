@@ -103,6 +103,9 @@ docker compose run --rm test-php82 vendor/bin/phpunit
 # Run tests with PHP 8.3
 docker compose run --rm test-php83 vendor/bin/phpunit
 
+# Run tests with PHP 8.4
+docker compose run --rm test-php84 vendor/bin/phpunit
+
 # Stop services
 docker compose down
 ```
