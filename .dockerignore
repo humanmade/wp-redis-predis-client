@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!TESTING.md
+!README.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# PHPUnit
+.phpunit.cache
+phpunit.xml.dist
+
+# Composer
+vendor/
+
+# Tasks and local files
+tasks/
+.claude/
+
+# CI/CD
+.github/

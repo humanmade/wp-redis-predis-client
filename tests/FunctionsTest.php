@@ -4,12 +4,22 @@ use PHPUnit\Framework\TestCase;
 
 class FunctionsTest extends TestCase {
 
-	protected static $client_parameters = array(
-		'host' => '127.0.0.1',
-		'port' => 6379,
-		'timeout' => 1000,
-		'retry_interval' => 100,
-	);
+	protected static $client_parameters;
+
+	public static function setUpBeforeClass(): void {
+		parent::setUpBeforeClass();
+		self::$client_parameters = array(
+			'host' => getenv('REDIS_HOST') ?: '127.0.0.1',
+			'port' => getenv('REDIS_PORT') ?: 6379,
+			'timeout' => 1000,
+			'retry_interval' => 100,
+		);
+
+		// Add authentication if REDIS_PASSWORD is set
+		if ( getenv('REDIS_PASSWORD') ) {
+			self::$client_parameters['auth'] = getenv('REDIS_PASSWORD');
+		}
+	}
 
 	public function test_dependencies() {
 		$result = WP_Predis\check_client_dependencies();

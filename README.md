@@ -5,11 +5,8 @@
             An alternative Redis client for use with <a href="https://github.com/pantheon-systems/wp-redis">WP Redis</a>. Enables TLS connections.
         </td>
         <td align="right" width="20%">
-            <a href="https://travis-ci.org/humanmade/wp-redis-predis-client">
-                <img src="https://travis-ci.org/humanmade/wp-redis-predis-client.svg?branch=master" alt="Build status">
-            </a>
-            <a href="https://codecov.io/gh/humanmade/wp-redis-predis-client">
-            <img src="https://codecov.io/gh/humanmade/wp-redis-predis-client/branch/master/graph/badge.svg" alt="Codecov" />
+            <a href="https://github.com/humanmade/wp-redis-predis-client/actions/workflows/tests.yml">
+                <img src="https://github.com/humanmade/wp-redis-predis-client/actions/workflows/tests.yml/badge.svg" alt="Build status">
             </a>
         </td>
     </tr>
@@ -63,5 +60,56 @@ $redis_server = array(
     ),
 );
 ```
+
+## Requirements
+
+- PHP 8.2 or higher
+- Predis 3.2.0 or higher
+- WordPress (when used in production)
+
+## Testing
+
+This package includes comprehensive tests for both standalone and WordPress integration scenarios.
+
+### Quick Test
+
+Run the test suite locally (requires Redis):
+
+```bash
+# Install dependencies
+composer install
+
+# Start Redis
+docker run -d --name redis-test -p 6379:6379 redis:latest
+
+# Run tests
+vendor/bin/phpunit
+
+# Stop Redis
+docker stop redis-test && docker rm redis-test
+```
+
+### Docker Testing (Multiple PHP Versions)
+
+Test across multiple PHP versions using Docker Compose:
+
+```bash
+# Start services
+docker compose up -d redis
+
+# Run tests with PHP 8.2
+docker compose run --rm test-php82 vendor/bin/phpunit
+
+# Run tests with PHP 8.3
+docker compose run --rm test-php83 vendor/bin/phpunit
+
+# Run tests with PHP 8.4
+docker compose run --rm test-php84 vendor/bin/phpunit
+
+# Stop services
+docker compose down
+```
+
+For detailed testing documentation, see [TESTING.md](TESTING.md).
 
 

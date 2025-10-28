@@ -4,14 +4,26 @@ use PHPUnit\Framework\TestCase;
 
 class WPPredisDecoratorTest extends TestCase {
 
-	protected static $arguments = array(
-		'host' => '127.0.0.1',
-		'port' => 6379,
-	);
+	protected static $arguments;
 
 	protected static $options = array();
 
-	public function setUp() {
+	protected $client;
+
+	public static function setUpBeforeClass(): void {
+		parent::setUpBeforeClass();
+		self::$arguments = array(
+			'host' => getenv('REDIS_HOST') ?: '127.0.0.1',
+			'port' => getenv('REDIS_PORT') ?: 6379,
+		);
+
+		// Add authentication if REDIS_PASSWORD is set
+		if ( getenv('REDIS_PASSWORD') ) {
+			self::$arguments['password'] = getenv('REDIS_PASSWORD');
+		}
+	}
+
+	public function setUp(): void {
 		parent::setUp();
 		$client = new Predis\Client( self::$arguments, self::$options );
 		$this->client = new WP_Predis\Decorator( $client );
@@ -109,7 +121,7 @@ class WPPredisDecoratorTest extends TestCase {
 		$this->assertEquals( null, $this->client->close() );
 	}
 
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		$this->client->flushall();
 	}
