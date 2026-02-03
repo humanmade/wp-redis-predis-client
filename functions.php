@@ -11,7 +11,6 @@ function add_filters( $add_filter_fn = 'add_filter' ) {
 	$add_filter_fn( 'wp_redis_prepare_client_connection_callback', 'WP_Predis\prepare_client_connection_callback' );
 	$add_filter_fn( 'wp_redis_perform_client_connection_callback', 'WP_Predis\perform_client_connection_callback', 10, 3 );
 	$add_filter_fn( 'wp_redis_retry_exception_messages', 'WP_Predis\append_error_messages' );
-	$add_filter_fn( 'shutdown', 'WP_Predis\shutdown', 10, 0 );
 }
 
 function check_client_dependencies() {
