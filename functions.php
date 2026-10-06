@@ -86,9 +86,33 @@ function build_options( $args ) {
 			'database' => isset( $args['database'] ) ? $args['database'] : null,
 			'persistent' => isset( $args['persistent'] ) ? $args['persistent'] : null,
 		),
+		'connections' => 'WP_Predis\create_connection_factory',
 	);
 
 	return $options;
+}
+
+/**
+ * Create the Predis connection factory used by the client.
+ *
+ * Uses Safe_Connection_Factory so a connection closed by the server mid-reply
+ * throws a ConnectionException instead of spinning forever (see Safe_Stream).
+ *
+ * @param \Predis\Configuration\OptionsInterface $options Client options.
+ * @return Safe_Connection_Factory
+ */
+function create_connection_factory( $options ) {
+	require_once __DIR__ . '/class-safe-stream.php';
+	require_once __DIR__ . '/class-safe-stream-factory.php';
+	require_once __DIR__ . '/class-safe-connection-factory.php';
+
+	$factory = new Safe_Connection_Factory();
+
+	if ( $options->defined( 'parameters' ) ) {
+		$factory->setDefaultParameters( $options->parameters );
+	}
+
+	return $factory;
 }
 
 function append_error_messages( $errors ) {
