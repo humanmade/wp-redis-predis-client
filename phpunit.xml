@@ -16,6 +16,9 @@
 	</testsuites>
 	<source>
 		<include>
+			<file>class-safe-connection-factory.php</file>
+			<file>class-safe-stream-factory.php</file>
+			<file>class-safe-stream.php</file>
 			<file>class-wp-predis-decorator.php</file>
 			<file>functions.php</file>
 			<file>object-cache.php</file>
